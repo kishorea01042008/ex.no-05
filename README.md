@@ -23,12 +23,48 @@ To write and execute an Assembly Language Program for sorting data in Ascending 
 ## Program (Ascending order)
 
 ```asm
+ORG 0000H
+
+MOV R4,#04H        ; Number of passes
+
+OUTER: MOV R3,#04H ; Inner loop counter
+       MOV R0,#50H ; Starting address
+
+INNER: MOV A,@R0   ; Get first element
+       MOV B,A
+
+       INC R0      ; Next element
+
+       CLR C
+       SUBB A,@R0  ; Compare two elements
+
+       JNC NO_SWAP ; If first > second, no swap
+
+       ; Swap elements
+
+       MOV A,@R0
+       XCH A,B
+       MOV @R0,A
+
+       DEC R0
+       MOV A,B
+       MOV @R0,A
+
+       INC R0
+
+NO_SWAP:
+       DJNZ R3,INNER
+       DJNZ R4,OUTER
+
+END
 
 
 
 
 ```
 ## OUTPUT(Ascending order)
+<img width="774" height="261" alt="image" src="https://github.com/user-attachments/assets/eeed54c9-1290-49fe-a856-7828fb01bfc1" />
+
 
 
 
@@ -49,12 +85,37 @@ To write and execute an Assembly Language Program for sorting data in Ascending 
 ## Program (Descending order)
 
 ```asm
+ORG 0000H
+MOV R4, #04H ；Number of passes (N-1)
+OUTER: MOV R3, #04H ； Inner 1oop counter
+MOV R0,#50H ；Array starting address
+INNER: MOV A, @R0
+MOV B, A
+INC R0
+CLR C
+SUBB A,@R0 ； Compare adjacent elements
+JC NO_SWAP ;If A< @RO (Carry), no swap
+；Exchange elements
+MOV A, @R0
+ХСН А, В
+MOV @R0, A 
+DEC RO 
+MOV A, B 
+XСH A, B 
+MOV @R0,A 
+INC R0
+NO_SWAP: DJNZ R3, INNER
+DJNZ R4, OUTER
+END
 
 
 
 
 ```
 ## OUTPUT(Descending order)
+<img width="928" height="171" alt="image" src="https://github.com/user-attachments/assets/af83a34b-29c9-4faf-a426-804fca5a5117" />
+<img width="936" height="166" alt="image" src="https://github.com/user-attachments/assets/db066059-ac33-43f0-8050-98a16a84b3d5" />
+
 
 
 
